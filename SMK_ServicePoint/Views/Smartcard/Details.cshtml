@@ -1,0 +1,105 @@
+﻿@model SmartCard
+<div class="container" style="margin-left:18%">
+    <div class="card">
+        <div class="card-header text-center text-uppercase">
+            SmartCard Details
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Family Head :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.FamilyHead</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Father Or Husband : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text">@Model.FatherOrHusband</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Date of Birth :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.DateofBirth</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Address :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.Address</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>SmartCard CardType :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.CardType</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Card Number :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.CardNumber</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Shop Number :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.ShopNumber</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Year :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.year</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Photo Image URL :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.PhotoImageUrl</p>
+                        </div>
+                    </div>
+                    <br />                               
+                </div>
+                <div class="col-md-2">
+                    <img src="@Model.PhotoImageUrl" width="150%" height="50%" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a asp-controller="Smartcard" asp-action="Index" class="btn btn-danger">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

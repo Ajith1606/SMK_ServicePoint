@@ -1,0 +1,275 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<User> signInManager;
+<div class="container">
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h2>SMK-Service Point</h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="About">About Us</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-controller="Home" asp-action="Service">Our Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                        </li>
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="userMenuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Services
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="userMenuDropdown">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Pancard" asp-action="Index">Pancard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Smartcard" asp-action="Index">Smartcard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Aadharcard" asp-action="Index">Aadharcard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Votercard" asp-action="Index">Votercard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Report" asp-action="Index">Reports</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Billing" asp-action="Index">Billing</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-heading header-text" style="width:135%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Our Services</h1>
+                    <span>We are over 20 years of experience</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-services" style="width:135%;">
+        <div class="container">
+            <div class="row" id="tabs">
+                <div class="col-md-4">
+                    <ul>
+                        <li><a href='#tabs-1'>Aadhaar Card <i class="fa fa-angle-right"></i></a></li>
+                        <li><a href='#tabs-2'>Pan Card <i class="fa fa-angle-right"></i></a></li>
+                        <li><a href='#tabs-3'>Voter Card <i class="fa fa-angle-right"></i></a></li>
+                        <li><a href='#tabs-4'>Smart Card <i class="fa fa-angle-right"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    <section class='tabs-content'>
+                        <article id='tabs-1'>
+                            <img src="~/assets/images/aadhar_3.jpg" alt="">
+                            <h4>Aadhaar Card</h4>
+                            <p>The Aadhaar Card is a unique identification document issued by the Government of India to all residents. It features a 12-digit unique identification number linked to the individual’s biometric data, including fingerprints, iris scans, and a photograph, along with demographic information like name, address, and date of birth. Managed by the Unique Identification Authority of India (UIDAI), Aadhaar is integral to various government schemes and services, ensuring transparency and reducing fraud. The card includes a QR code for easy verification and serves as proof of identity and address across India. It is widely used for processes like opening bank accounts, e-KYC, and filing income tax returns, making it a vital document for citizens and residents.</p>
+                        </article>
+                        <article id='tabs-2'>
+                            <img src="~/assets/images/pan_3.jpg" alt="">
+                            <h4>Pan Card</h4>
+                            <p>The PAN (Permanent Account Number) Card is a crucial document issued by the Indian Income Tax Department for financial and tax-related purposes. It comprises a unique 10-character alphanumeric code that links individuals and entities to their financial transactions. The card contains personal details such as name, date of birth, and a photograph, serving as a valid proof of identity. PAN is essential for filing income tax returns, opening bank accounts, making large financial transactions, and preventing tax evasion. It is also required for linking with Aadhaar for compliance purposes. Universally accepted across India, the PAN Card plays a significant role in maintaining financial transparency and record-keeping.</p>
+                        </article>
+                        <article id='tabs-3'>
+                            <img src="~/assets/images/voter_3.jpg" alt="">
+                            <h4>Voter Card</h4>
+                            <p>The Voter ID Card, also known as the Electoral Photo Identity Card (EPIC), is issued by the Election Commission of India to eligible voters. It serves as proof of identity for participating in elections at local, state, and national levels. The card includes the voter’s name, photograph, address, and a unique serial number, ensuring authenticity and preventing electoral fraud. It is mandatory for all citizens aged 18 and above who wish to vote, thereby empowering them in the democratic process. Apart from its primary purpose, the Voter ID Card is also accepted as valid identification in various official contexts. It plays a pivotal role in fostering free and fair elections.</p>
+                        </article>
+                        <article id='tabs-4'>
+                            <img src="~/assets/images/ration_3.jpg" alt="">
+                            <h4>Smart Card</h4>
+                            <p>A Smart Card is a technologically advanced card embedded with a microchip that securely stores encrypted data. Widely used in banking, healthcare, transportation, and security systems, Smart Cards are designed for secure identification, authentication, and data transactions. The chip on the card enables it to perform multiple functions, such as storing personal information, processing payments, and granting access to restricted systems. Smart Cards can be contact-based or contactless, depending on their application. Durable and convenient, these cards are essential in modern digital systems, enhancing security, preventing fraud, and simplifying various processes, making them a cornerstone of contemporary technology.</p>
+                        </article>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="callback-form callback-services" style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Request a <em>call back</em></h2>
+              <span>Contuct Us for any Quries</span>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" class="form-control" id="email" placeholder="E-Mail Address" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="subject" type="text" class="form-control" id="subject" placeholder="Subject" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="border-button">Send Message</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="partners" style="width:135%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-partners owl-carousel">
+                        <div class="partner-item">
+                            <img src="~/assets/images/welcome.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+   
+    <footer style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 footer-item">
+            <h4>SMK-Service Point</h4>
+            <p>We are updating the Government personal Details like creating new Cards and has a service called E-Savai.
+              We are updating the Government personal Details like Aadhaar Card, Pan Card, Smart Card and Voter Card Updates as well as creating new Cards.
+              You can download, edit and Create a new Government Cards through our services</p>
+            <ul class="social-icons">
+              <li><a rel="nofollow" href="https://fb.com/templatemo" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-behance"></i></a></li>
+            </ul>
+          </div>
+          
+          <div class="col-md-4 footer-item">
+            <h4>Additional Pages</h4>
+            <ul class="menu-list">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">How We Work</a></li>
+              <li><a href="#">Quick Support</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-item last-item">
+            <h4>Contact Us</h4>
+            <div class="contact-form">
+              <form id="contact footer-contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" class="form-control" id="email" placeholder="E-Mail Address" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="sub-footer" style="width:135%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        Copyright &copy; SMK-Service Point Co., Ltd.
+
+                        - Design : <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">Ajith Kumar</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="~/assets/js/custom.js"></script>
+<script src="~/assets/js/owl.js"></script>
+<script src="~/assets/js/slick.js"></script>
+<script src="~/assets/js/accordions.js"></script>
+
+<script language="text/Javascript">
+
+    cleared[0] = cleared[1] = cleared[2] = 0;
+    function clearField(t){
+    if(! cleared[t.id]){
+        cleared[t.id] = 1;
+        t.value='';
+        t.style.color='#fff';
+        }
+    }
+</script>

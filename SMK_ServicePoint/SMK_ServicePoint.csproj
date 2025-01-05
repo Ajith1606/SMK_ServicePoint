@@ -1,0 +1,183 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\assets\css\flex-slider.css" />
+    <Content Remove="wwwroot\assets\css\fontawesome.css" />
+    <Content Remove="wwwroot\assets\css\owl.css" />
+    <Content Remove="wwwroot\assets\css\templatemo-finance-business.css" />
+    <Content Remove="wwwroot\assets\fonts\Flaticon.woff" />
+    <Content Remove="wwwroot\assets\fonts\flexslider-icon.eot" />
+    <Content Remove="wwwroot\assets\fonts\flexslider-icon.svg" />
+    <Content Remove="wwwroot\assets\fonts\flexslider-icon.ttf" />
+    <Content Remove="wwwroot\assets\fonts\flexslider-icon.woff" />
+    <Content Remove="wwwroot\assets\fonts\fontawesome-webfont.eot" />
+    <Content Remove="wwwroot\assets\fonts\fontawesome-webfont.svg" />
+    <Content Remove="wwwroot\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Remove="wwwroot\assets\fonts\fontawesome-webfont.woff" />
+    <Content Remove="wwwroot\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Remove="wwwroot\assets\fonts\FontAwesome.otf" />
+    <Content Remove="wwwroot\assets\fonts\slick.eot" />
+    <Content Remove="wwwroot\assets\fonts\slick.svg" />
+    <Content Remove="wwwroot\assets\fonts\slick.ttf" />
+    <Content Remove="wwwroot\assets\fonts\slick.woff" />
+    <Content Remove="wwwroot\assets\images\aadhar_1.jpg" />
+    <Content Remove="wwwroot\assets\images\aadhar_2.jpg" />
+    <Content Remove="wwwroot\assets\images\aadhar_3.jpg" />
+    <Content Remove="wwwroot\assets\images\about-image.jpg" />
+    <Content Remove="wwwroot\assets\images\client-01.png" />
+    <Content Remove="wwwroot\assets\images\fun-facts-bg.jpg" />
+    <Content Remove="wwwroot\assets\images\more-info.jpg" />
+    <Content Remove="wwwroot\assets\images\page-heading-bg.jpg" />
+    <Content Remove="wwwroot\assets\images\pan_1.jpg" />
+    <Content Remove="wwwroot\assets\images\pan_2.jpg" />
+    <Content Remove="wwwroot\assets\images\pan_3.jpg" />
+    <Content Remove="wwwroot\assets\images\ration_1.jpg" />
+    <Content Remove="wwwroot\assets\images\ration_2.jpg" />
+    <Content Remove="wwwroot\assets\images\ration_3.jpg" />
+    <Content Remove="wwwroot\assets\images\service_01.jpg" />
+    <Content Remove="wwwroot\assets\images\service_02.jpg" />
+    <Content Remove="wwwroot\assets\images\service_03.jpg" />
+    <Content Remove="wwwroot\assets\images\single_service_01.jpg" />
+    <Content Remove="wwwroot\assets\images\single_service_02.jpg" />
+    <Content Remove="wwwroot\assets\images\single_service_03.jpg" />
+    <Content Remove="wwwroot\assets\images\single_service_04.jpg" />
+    <Content Remove="wwwroot\assets\images\slide_01.jpg" />
+    <Content Remove="wwwroot\assets\images\slide_02.jpg" />
+    <Content Remove="wwwroot\assets\images\slide_03.jpg" />
+    <Content Remove="wwwroot\assets\images\SMK_icon.jpg" />
+    <Content Remove="wwwroot\assets\images\team_01.jpg" />
+    <Content Remove="wwwroot\assets\images\team_02.jpg" />
+    <Content Remove="wwwroot\assets\images\team_03.jpg" />
+    <Content Remove="wwwroot\assets\images\voter_1.jpg" />
+    <Content Remove="wwwroot\assets\images\voter_2.jpg" />
+    <Content Remove="wwwroot\assets\images\voter_3.jpg" />
+    <Content Remove="wwwroot\assets\images\welcome.jpg" />
+    <Content Remove="wwwroot\assets\js\accordions.js" />
+    <Content Remove="wwwroot\assets\js\custom.js" />
+    <Content Remove="wwwroot\assets\js\jquery.singlePageNav.min.js" />
+    <Content Remove="wwwroot\assets\js\owl.js" />
+    <Content Remove="wwwroot\assets\js\slick.js" />
+    <Content Remove="wwwroot\vendor\bootstrap\css\bootstrap.css" />
+    <Content Remove="wwwroot\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Remove="wwwroot\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Remove="wwwroot\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.js" />
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Remove="wwwroot\vendor\jquery\jquery.js" />
+    <Content Remove="wwwroot\vendor\jquery\jquery.min.js" />
+    <Content Remove="wwwroot\vendor\jquery\jquery.min.map" />
+    <Content Remove="wwwroot\vendor\jquery\jquery.slim.js" />
+    <Content Remove="wwwroot\vendor\jquery\jquery.slim.min.js" />
+    <Content Remove="wwwroot\vendor\jquery\jquery.slim.min.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bootstrap.Datepicker" Version="1.8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Stripe.net" Version="47.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Image\AadharCardClient\" />
+    <Folder Include="wwwroot\Image\VoterCardClient\" />
+    <Folder Include="wwwroot\Image\SmartCardClient\" />
+    <Folder Include="wwwroot\Image\PanCardClient\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\css\flex-slider.css" />
+    <None Include="wwwroot\assets\css\fontawesome.css" />
+    <None Include="wwwroot\assets\css\owl.css" />
+    <None Include="wwwroot\assets\css\templatemo-finance-business.css" />
+    <None Include="wwwroot\assets\fonts\Flaticon.woff" />
+    <None Include="wwwroot\assets\fonts\flexslider-icon.eot" />
+    <None Include="wwwroot\assets\fonts\flexslider-icon.svg" />
+    <None Include="wwwroot\assets\fonts\flexslider-icon.ttf" />
+    <None Include="wwwroot\assets\fonts\flexslider-icon.woff" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\assets\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\assets\fonts\slick.eot" />
+    <None Include="wwwroot\assets\fonts\slick.svg" />
+    <None Include="wwwroot\assets\fonts\slick.ttf" />
+    <None Include="wwwroot\assets\fonts\slick.woff" />
+    <None Include="wwwroot\assets\images\aadhar_1.jpg" />
+    <None Include="wwwroot\assets\images\aadhar_2.jpg" />
+    <None Include="wwwroot\assets\images\aadhar_3.jpg" />
+    <None Include="wwwroot\assets\images\about-image.jpg" />
+    <None Include="wwwroot\assets\images\client-01.png" />
+    <None Include="wwwroot\assets\images\fun-facts-bg.jpg" />
+    <None Include="wwwroot\assets\images\more-info.jpg" />
+    <None Include="wwwroot\assets\images\page-heading-bg.jpg" />
+    <None Include="wwwroot\assets\images\pan_1.jpg" />
+    <None Include="wwwroot\assets\images\pan_2.jpg" />
+    <None Include="wwwroot\assets\images\pan_3.jpg" />
+    <None Include="wwwroot\assets\images\ration_1.jpg" />
+    <None Include="wwwroot\assets\images\ration_2.jpg" />
+    <None Include="wwwroot\assets\images\ration_3.jpg" />
+    <None Include="wwwroot\assets\images\service_01.jpg" />
+    <None Include="wwwroot\assets\images\service_02.jpg" />
+    <None Include="wwwroot\assets\images\service_03.jpg" />
+    <None Include="wwwroot\assets\images\single_service_01.jpg" />
+    <None Include="wwwroot\assets\images\single_service_02.jpg" />
+    <None Include="wwwroot\assets\images\single_service_03.jpg" />
+    <None Include="wwwroot\assets\images\single_service_04.jpg" />
+    <None Include="wwwroot\assets\images\slide_01.jpg" />
+    <None Include="wwwroot\assets\images\slide_02.jpg" />
+    <None Include="wwwroot\assets\images\slide_03.jpg" />
+    <None Include="wwwroot\assets\images\SMK_icon.jpg" />
+    <None Include="wwwroot\assets\images\team_01.jpg" />
+    <None Include="wwwroot\assets\images\team_02.jpg" />
+    <None Include="wwwroot\assets\images\team_03.jpg" />
+    <None Include="wwwroot\assets\images\voter_1.jpg" />
+    <None Include="wwwroot\assets\images\voter_2.jpg" />
+    <None Include="wwwroot\assets\images\voter_3.jpg" />
+    <None Include="wwwroot\assets\images\welcome.jpg" />
+    <None Include="wwwroot\assets\js\accordions.js" />
+    <None Include="wwwroot\assets\js\custom.js" />
+    <None Include="wwwroot\assets\js\jquery.singlePageNav.min.js" />
+    <None Include="wwwroot\assets\js\owl.js" />
+    <None Include="wwwroot\assets\js\slick.js" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap.css" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap.min.css" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\vendor\jquery\jquery.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.min.map" />
+    <None Include="wwwroot\vendor\jquery\jquery.slim.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.slim.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.slim.min.map" />
+  </ItemGroup>
+
+</Project>

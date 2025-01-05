@@ -1,0 +1,169 @@
+﻿@model Voter
+<div class="container" style="margin-left:18%">
+    <div class="card">
+        <div class="card-header text-center text-uppercase">
+            VoterCard Details
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Epic No :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.EpicNo</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Tamil Name :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.TamilName</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Name : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text">@Model.Name</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Title : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text">@Model.Title</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Tamil FatherName or HusbandName : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text">@Model.TamilFatherNameorHusbandName</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>FatherName or HusbandName : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text">@Model.FatherNameorHusbandName</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Gender : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text">@Model.Gender</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Date of Birth :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.DateofBirth</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Tamil Address :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.TamilAddress</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Address :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.Address</p>
+                        </div>
+                    </div>
+                    <br />        
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Tamil Electoral Registration Officier :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.TamilElectoralRegistrationOfficier</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Electoral Registration Officier :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.ElectoralRegistrationOfficier</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Download Date :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.DownloadDate</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Photo Image URL :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.PhotoImageUrl</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Sign Image URL :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.SignImageUrl</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>QR Image URL :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.QRImageUrl</p>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <div class="col-md-2">
+                    <img src="@Model.PhotoImageUrl" width="150%" height="50%" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a asp-controller="votercard" asp-action="Index" class="btn btn-danger">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

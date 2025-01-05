@@ -1,0 +1,76 @@
+﻿@model List<SmartCard>
+<div class="container" style="width:121%; margin-left:18%">
+    <div class="row mb-4">
+        <div class="col-md-12 text-uppercase text-center">
+            <h2> SmartCard List </h2>
+            <div class="col-md-12 text-end">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-success"> Home </a>
+            </div>
+        </div>
+        <div class="col-md-12 text-end">
+            <a asp-controller="Smartcard" asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Create</a>
+        </div>
+    </div>
+    <hr />
+
+    @if (Model.Count() > 0)
+    {
+        <table id="table" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">FamilyHead</th>
+                    <th class="text-center">FatherOrHusband</th>
+                    <th class="text-center">DateofBirth</th>
+                    <th class="text-center">CardType</th>
+                    <th class="text-center">Photo</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FamilyHead</td>
+                        <td>@item.FatherOrHusband</td>
+                        <td>@item.DateofBirth</td>
+                        <td>@item.CardType</td>
+                        <td><img src="@item.PhotoImageUrl" width="90px" height="60px" /></td>
+                        <td class="d-flex align-items-center justify-content-center">
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Smartcard" asp-action="Details" asp-route-id="@item.Id"
+                                   class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Details">
+                                    <i class="bi bi-info-circle"></i> Details
+                                </a>
+                                <a asp-controller="Smartcard" asp-action="Edit" asp-route-id="@item.Id"
+                                   class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a asp-controller="Smartcard" asp-action="Delete" asp-route-id="@item.Id"
+                                   class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text text-uppercase text-center text-warning pt-4">No Records are Available</h2>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $('.table').DataTable();
+    </script>
+}
+

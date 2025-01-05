@@ -1,0 +1,195 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<User> signInManager;
+<div class="container">
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h2>SMK-Service Point</h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-controller="Home" asp-action="About">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Service">Our Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                        </li> 
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="userMenuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Services
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="userMenuDropdown">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Pancard" asp-action="Index">Pancard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Smartcard" asp-action="Index">Smartcard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Aadharcard" asp-action="Index">Aadharcard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Votercard" asp-action="Index">Votercard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Report" asp-action="Index">Reports</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Billing" asp-action="Index">Billing</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="page-heading header-text" style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>About Us</h1>
+            <span>We have over 10 years of experience</span>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div class="more-info about-info" style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="more-info-content">
+              <div class="row">
+                <div class="col-md-6 align-self-center">
+                  <div class="right-content">
+                    <span>our solid background on E-Savai</span>
+                    <h2>Get to know about <em>our company</em></h2>
+                    <p>Common Service Centre - Providing Essential Government and Private Services Aadhaar Card Updates
+                      PAN Card Updates<br> Voter ID Updates<br> Smart Card Services<br> Xerox and Photocopy Services<br>LIC and Insurance Services<br>
+                       Government Exam Registration (TNPSC, TRB, TET)<br>DTH Recharge Services<br>Bike and Car Insurance Services <br>                
+                    </p>
+                    <a href="" class="filled-button">Read More</a>
+                    <br>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="left-image">
+                    <img src="~/assets/images/SMK_icon.jpg" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+  
+    <footer style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 footer-item">
+            <h4>SMK-Service Point</h4>
+            <p>We are updating the Government personal Details like creating new Cards and has a service called E-Savai.
+              We are updating the Government personal Details like Aadhaar Card, Pan Card, Smart Card and Voter Card Updates as well as creating new Cards.
+              You can download, edit and Create a new Government Cards through our services</p>
+            <ul class="social-icons">
+              <li><a rel="nofollow" href="https://fb.com/templatemo" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-behance"></i></a></li>
+            </ul>
+          </div>         
+          <div class="col-md-4 footer-item">
+            <h4>Additional Pages</h4>
+            <ul class="menu-list">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">How We Work</a></li>
+              <li><a href="#">Quick Support</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-item last-item">
+            <h4>Contact Us</h4>
+            <div class="contact-form">
+              <form id="contact footer-contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" class="form-control" id="email"  placeholder="E-Mail Address" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <div class="sub-footer" style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p>Copyright &copy; SMK-Service Point Co., Ltd.
+            
+            - Design : <a  href="#" target="_blank">Ajith Kumar</a></p>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+</div>
+
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="~/assets/js/custom.js"></script>
+<script src="~/assets/js/owl.js"></script>
+<script src="~/assets/js/slick.js"></script>
+<script src="~/assets/js/accordions.js"></script>
+
+<script language="text/Javascript">
+    cleared[0] = cleared[1] = cleared[2] = 0;
+    function clearField(t) {
+        if (!cleared[t.id]) {
+            cleared[t.id] = 1;
+            t.value = '';
+            t.style.color = '#fff';
+        }
+    }
+</script>

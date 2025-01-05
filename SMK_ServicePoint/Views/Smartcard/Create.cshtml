@@ -1,0 +1,327 @@
+﻿@model SmartCard
+<script src="path/to/qrcode.min.js"></script>
+
+<div class="container" style="margin-left:18%">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <h2 class="text text-uppercase text-center">Create Smartcard</h2>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6  border-1 border">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="@Model.FamilyHead" class="form-label"></label>
+                    <input asp-for="@Model.FamilyHead" id="FamilyHeadInput" class="form-control" />
+                    <span asp-validation-for="@Model.FamilyHead" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.FatherOrHusband" class="form-label"></label>
+                    <input asp-for="@Model.FatherOrHusband" id="FatherOrHusbandInput" class="form-control" />
+                    <span asp-validation-for="@Model.FatherOrHusband" class="text-danger"></span>
+                </div>               
+                <div class="mb-3">
+                    <label asp-for="@Model.DateofBirth" class="form-label"></label>
+                    @Html.TextBoxFor(m => m.DateofBirth, new { @type = "date", @class = "form-control", id = "DateOfBirthInput" })
+                    <span asp-validation-for="@Model.DateofBirth" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Address" class="form-label"></label>
+                    <input asp-for="@Model.Address" id="AddressInput" class="form-control" />
+                    <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.CardType" class="form-label"></label>
+                    <input asp-for="@Model.CardType" id="CardTypeInput" class="form-control" />
+                    <span asp-validation-for="@Model.CardType" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.CardNumber" class="form-label"></label>
+                    <input asp-for="@Model.CardNumber" id="CardNumberInput" class="form-control" />
+                    <span asp-validation-for="@Model.CardNumber" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.ShopNumber" class="form-label"></label>
+                    <input asp-for="@Model.ShopNumber" id="ShopNumberInput" class="form-control" />
+                    <span asp-validation-for="@Model.ShopNumber" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.year" class="form-label"></label>
+                    <input asp-for="@Model.year" id="yearInput" class="form-control" />
+                    <span asp-validation-for="@Model.year" class="text-danger"></span>
+                </div>          
+                <div class="mb-3">
+                    <label asp-for="@Model.PhotoImageUrl" class="form-label"></label>
+                    <input type="file" name="photo" id="Uploadphoto" class="form-control" />
+                    <small><strong>Note:</strong>Please make sure upload Image should be in Passport size</small>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.QRImageUrl" class="form-label"></label>
+                    <input asp-for="@Model.QRImageUrl" id="QRImageUrlInput" readonly class="form-control" />                  
+                </div>
+@*              <h3>SmartCard Members</h3>
+                <div class="mb-3">
+                    <div id="members-list">
+                        <div class="member">
+                            <label>Member Name</label>
+                            <input name="members[0].MemberName" class="form-control" />
+                        </div>
+                    </div>
+                    <br />
+                    <button type="button" id="add-member" class="btn btn-secondary">Add Member</button>               
+                </div> *@
+                <div class="mb-3">
+                    <a asp-controller="Smartcard" asp-action="Index" class="btn btn-danger"> Back </a>                       
+                    <button type="submit" class="btn btn-success"> Create </button> 
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 border-1 border" id="dvContents">
+            <div class="row h-50">
+                <div class="col-11 border-1 m-3 position-relative">
+                    <img id="frontImage" src="~/Image/SmartCard/smf.png" class="img-fluid h-95 w-100" alt="Smart Front" />
+                    @*  Photo *@
+                    <img id="uploadedPhotoPreview" src="#" alt="Uploaded Passport Photo" style="display: none;
+                        position: absolute; top: 40.4%; left: 15.3%; transform: translate(-50%, -50%);
+                        width: 1.05in; height: 1.17in; object-fit: cover;" />                   
+                    @*FamilyHead*@
+                    <div id="foregroundTextFamilyHead" style="position: absolute; top: 29%; left: 85%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*FatherOrHusband*@
+                    <div id="foregroundTextFatherOrHusband" style="position: absolute; top: 35.2%; left: 85%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>                  
+                    @*DateofBirth*@
+                    <div id="dateText" style="position: absolute; top: 43%; left: 84%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Address*@
+                    <div id="foregroundTextAddress" style="position: absolute; top: 58%; left: 84%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center;  white-space: pre-wrap; word-wrap: break-word;">
+                    </div>
+                    @*CardType*@
+                    <div id="foregroundTextCardType" style="position: absolute; top: 58%; left: 15%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*CardNumber*@
+                    <div id="foregroundTextCardNumber" style="position: absolute; top: 65%; left: 15%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>                  
+                </div>
+            </div>
+            <div class="row h-50">
+                <div class="col-11 border-1 m-3 position-relative">
+                    <img id="backImage" src="~/Image/SmartCard/smb.png" class="img-fluid h-95 w-100" alt="Smart Back" />
+                    @*ShopNumber*@
+                    <div id="foregroundTextShopNumber" style="position: absolute; top: 10%; left: 53%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*year*@
+                    <div id="foregroundTextyear" style="position: absolute; top: 15%; left: 53%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*QrCode*@
+                    <div id="qrCodeContainer" style="position: absolute; top: 29%; left: 46%;
+                        transform: translate(-50%, -50%); width: 85px; height: 80px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" value="Print" onclick="PrintHTML()">Print</button>
+    <br><br>
+</div>
+
+<style>
+    .h-50 {
+        height: 50%;
+        width: 107%;
+    }
+
+    .row {
+        height: 100%;
+    }
+
+    #uploadedPhotoPreview {
+        width: 1.2in;
+        height: 1.2in;
+        object-fit: cover;
+    }
+</style>
+@* addmember *@
+<script>
+    let memberIndex = 1;
+    document.getElementById('add-member').addEventListener('click', function () {
+        const memberHtml = `
+                <div class="member">
+                    <label>Member Name</label>
+                    <input name="Members[${memberIndex}].MemberName" class="form-control" />
+                </div>`;
+        document.getElementById('members-list').insertAdjacentHTML('beforeend', memberHtml);
+        memberIndex++;
+    });
+</script>
+<script type="text/javascript">
+    //print
+    function PrintHTML() {
+        var dvContents = document.getElementById("dvContents");
+        var printWindow = window.open('', '', 'height=600,width=1000');
+        printWindow.document.write(dvContents.innerHTML);
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+<script>
+ 
+</script>
+<script>
+
+    //FamilyHead
+    const FamilyHead = document.getElementById('FamilyHeadInput');
+    const foregroundTextFamilyHead = document.getElementById('foregroundTextFamilyHead');
+
+    FamilyHead.addEventListener('input', function () {
+        foregroundTextFamilyHead.textContent = FamilyHead.value;
+    });
+
+    //FatherOrHusband
+    const FatherOrHusband = document.getElementById('FatherOrHusbandInput');
+    const foregroundTextFatherOrHusband = document.getElementById('foregroundTextFatherOrHusband');
+
+    FatherOrHusband.addEventListener('input', function () {
+        foregroundTextFatherOrHusband.textContent = FatherOrHusband.value;
+    });
+   
+    //DateOfBirth
+    const dateOfBirth = document.getElementById('DateOfBirthInput');
+    const dateText = document.getElementById('dateText');
+
+    dateOfBirth.addEventListener('input', function () {
+        const dateValue = dateOfBirth.value;
+        if (dateValue) {
+            const formattedDate = new Date(dateValue).toLocaleDateString();
+            dateText.textContent = formattedDate;
+        } else {
+            dateText.textContent = '';
+        }
+    });
+
+    //Address
+    const Address = document.getElementById('AddressInput');
+    const foregroundTextAddress = document.getElementById('foregroundTextAddress');
+
+    Address.addEventListener('input', function () {
+        const text = Address.value;
+        // Break the input into lines of up to 13 characters
+        const lines = [];
+        for (let i = 0; i < text.length; i += 9) {
+            lines.push(text.substring(i, i + 9));
+        }
+        // Join the lines with newlines and update the content
+        foregroundTextAddress.textContent = lines.join('\n');
+    });
+
+    //CardType
+    const CardType = document.getElementById('CardTypeInput');
+    const foregroundTextCardType = document.getElementById('foregroundTextCardType');
+
+    CardType.addEventListener('input', function () {
+        foregroundTextCardType.textContent = CardType.value;
+    })
+
+    //CardNumber
+    const CardNumber = document.getElementById('CardNumberInput');
+    const foregroundTextCardNumber = document.getElementById('foregroundTextCardNumber');
+
+    CardNumber.addEventListener('input', function () {
+        foregroundTextCardNumber.textContent = CardNumber.value;
+    })
+
+    //ShopNumber
+    const ShopNumber = document.getElementById('ShopNumberInput');
+    const foregroundTextShopNumber = document.getElementById('foregroundTextShopNumber');
+
+    ShopNumber.addEventListener('input', function () {
+        foregroundTextShopNumber.textContent = ShopNumber.value;
+    })
+
+    //year
+    const year = document.getElementById('yearInput');
+    const foregroundTextyear = document.getElementById('foregroundTextyear');
+
+    year.addEventListener('input', function () {
+        foregroundTextyear.textContent = year.value;
+    })
+
+    //photo
+    document.getElementById('Uploadphoto').addEventListener('change', function (event) {
+        const uploadedPhotoPreview = document.getElementById('uploadedPhotoPreview');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedPhotoPreview.src = e.target.result;
+                uploadedPhotoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            uploadedPhotoPreview.style.display = 'none';
+        }
+    });
+  
+    //qrcode
+    function generateQRCode() {
+        const qrCodeContainer = document.getElementById('qrCodeContainer');
+        qrCodeContainer.innerHTML = '';
+        const qrContent = `${FamilyHeadInput.value}|${FatherOrHusbandInput.value}|${CardTypeInput.value}|${CardNumberInput.value}|${ShopNumberInput.value}|${yearInput.value}|${AddressInput.value}|${DateOfBirthInput.value}`;
+
+        // Generate QR code
+        new QRCode(qrCodeContainer, {
+            text: qrContent,
+            width: 119,
+            height: 107,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+        });
+
+        const qrImageUrlInput = document.getElementById('QRImageUrlInput');
+        qrImageUrlInput.value = qrContent; // This assumes you are storing the raw QR content
+    }
+
+    FamilyHeadInput.addEventListener('input', generateQRCode);
+    FatherOrHusbandInput.addEventListener('input', generateQRCode); 
+    DateOfBirthInput.addEventListener('input', generateQRCode);
+    AddressInput.addEventListener('input', generateQRCode);
+    CardTypeInput.addEventListener('input', generateQRCode);
+    CardNumberInput.addEventListener('input', generateQRCode);
+    ShopNumberInput.addEventListener('input', generateQRCode);
+    yearInput.addEventListener('input', generateQRCode);
+    //qrcodesave
+    function saveQRCodeImage() {
+        const qrCanvas = document.querySelector('#qrCodeContainer canvas');
+        const qrImageBase64 = qrCanvas.toDataURL('image/png');
+        document.getElementById('QRImageUrlInput').value = qrImageBase64;
+    }
+
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+

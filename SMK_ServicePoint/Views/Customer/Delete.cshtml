@@ -1,0 +1,34 @@
+﻿@model Customer
+<div class="container" style="margin-left:18%">
+    <div class="row">
+        <h2 class="text-center mb-4">Customer</h2>
+        <div class="col-md-12">
+            <form method="post">
+                <div class="mb-3">
+                    <label asp-for="@Model.CustomerName" class="form-label"></label>
+                    <input asp-for="@Model.CustomerName" class="form-control" disabled/>               
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Phone" class="form-label"></label>
+                    <input asp-for="@Model.Phone" class="form-control" disabled />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Email" class="form-label"></label>
+                    <input asp-for="@Model.Email" class="form-control" disabled />
+                </div>
+
+                <div class="mb-3">
+                    <a asp-controller="Customer" asp-action="Index" class="btn btn-danger"> Back </a>
+                    <button type="submit" class="btn btn-success"> Delete </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+

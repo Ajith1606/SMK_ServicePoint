@@ -1,0 +1,62 @@
+﻿@model PanCard
+<div class="container" style="margin-left:18%">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text text-uppercase text-center">Edit PanCard</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 border-1 border">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="@Model.PanNo" class="form-label"></label>
+                    <input asp-for="@Model.PanNo" class="form-control" />
+                    <span asp-validation-for="@Model.PanNo" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Name" class="form-label"></label>
+                    <input asp-for="@Model.Name" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.FatherName" class="form-label"></label>
+                    <input asp-for="@Model.FatherName" class="form-control" />
+                    <span asp-validation-for="@Model.FatherName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.PanNSDLUTI" class="form-label"></label>
+                    <div>
+                        <label>
+                            @Html.RadioButtonFor(m => m.PanNSDLUTI, "NSDL") NSDL
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            @Html.RadioButtonFor(m => m.PanNSDLUTI, "UTI") UTI
+                        </label>
+                    </div>
+                    <span asp-validation-for="@Model.PanNSDLUTI" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.PhotoImageUrl" class="form-label"></label>
+                    <input type="file" name="photo" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <a asp-controller="Pancard" asp-action="Index" class="btn btn-danger"> Back </a>
+                    <button type="submit" class="btn btn-warning"> Update </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            @if (Model.PhotoImageUrl != null)
+            {
+                <img src="@Model.PhotoImageUrl" width="150%" height="50%" />            
+            }      
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

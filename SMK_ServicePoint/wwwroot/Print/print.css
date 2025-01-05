@@ -1,0 +1,32 @@
+﻿body {
+}
+
+@media print {
+    body
+
+{
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents unwanted scrolling */
+}
+
+.container {
+    width: 100%;
+    height: auto; /* Adjusts to content */
+}
+
+#dvContents {
+    page-break-after: always; /* Ensures each page starts fresh */
+}
+
+img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Additional styles to hide unnecessary elements during print */
+.btn {
+    display: none; /* Hides buttons when printing */
+}
+
+}

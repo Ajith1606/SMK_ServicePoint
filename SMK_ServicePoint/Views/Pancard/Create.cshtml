@@ -1,0 +1,277 @@
+﻿@model PanCard
+<script src="path/to/qrcode.min.js"></script>
+
+<div class="container" style="margin-left:18%">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <h2 class="text text-uppercase text-center">Create Pancard</h2>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6  border-1 border">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="@Model.PanNo" class="form-label"></label>
+                    <input asp-for="@Model.PanNo" id="PanNoInput" class="form-control" />
+                    <span asp-validation-for="@Model.PanNo" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Name" class="form-label"></label>
+                    <input asp-for="@Model.Name" id="NameInput" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.FatherName" class="form-label"></label>
+                    <input asp-for="@Model.FatherName" id="FatherNameInput" class="form-control" />
+                    <span asp-validation-for="@Model.FatherName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.DateofBirth" class="form-label"></label>
+                    @Html.TextBoxFor(m => m.DateofBirth, new { @type = "date", @class = "form-control", id = "DateOfBirthInput" })
+                    <span asp-validation-for="@Model.DateofBirth" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.PanNSDLUTI" class="form-label"></label>                     
+                    <div >
+                        <label >
+                            @Html.RadioButtonFor(m => m.PanNSDLUTI, "NSDL", new { onchange = "updateImages('NSDL')" }) NSDL
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            @Html.RadioButtonFor(m => m.PanNSDLUTI, "UTI", new { onchange = "updateImages('UTI')" }) UTI
+                        </label>
+                    </div>                                                   
+                   <span asp-validation-for="@Model.PanNSDLUTI" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.PhotoImageUrl" class="form-label"></label>
+                    <input type="file" name="photo"  id="Uploadphoto" class="form-control" />
+                    <small><strong>Note:</strong>Please make sure upload Image should be in Passport size</small>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.SignImageUrl" class="form-label"></label>
+                    <input type="file" name="sign" id="Uploadsign" class="form-control" />
+                    <small><strong>Note:</strong>The Sign Image cannot be changed. Please make sure upload correct Image</small>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.QRImageUrl" class="form-label"></label>
+                    <input asp-for="@Model.QRImageUrl" id="QRImageUrlInput" readonly class="form-control" />
+                </div>
+               
+                <div class="mb-3">
+                    <a asp-controller="Pancard" asp-action="Index" class="btn btn-danger"> Back </a>
+                    <button type="submit" class="btn btn-success"> Create </button>
+                </div>
+            </form>         
+        </div>
+        <div class="col-md-6 border-1 border" id="dvContents">
+            <div class="row h-50">
+                <div class="col-11 border-1 m-3 position-relative">
+                    <img id="frontImage" src="~/Image/PanCard/Pan_Front_NSDL.jpg" class="img-fluid h-90 w-110" alt="NSDL Front" />
+                    <img id="uploadedPhotoPreview" src="#" alt="Uploaded Passport Photo" style="display: none;
+                        position: absolute; top: 32%; left: 14.5%; transform: translate(-50%, -50%); 
+                        width: 0.9in; height: 0.9in; object-fit: cover;" />
+                    <img id="uploadedSignPreview" src="#" alt="Uploaded Passport Photo" style="display: none;
+                        position: absolute; top: 66%; left: 50%; transform: translate(-50%, -50%);
+                        width: 200px; height: 37px; object-fit: cover;" />
+                    @*QrCode*@
+                    <div id="qrCodeContainer" style="position: absolute; top: 34%; left: 75%; 
+                        transform: translate(-50%, -50%); width: 100px; height: 100px;">
+                    </div>
+                    @*PanNo*@
+                    <div id="foregroundTextPanNo" style="position: absolute; top: 35%; left: 45%;
+                        transform: translate(-50%, -50%); font-size: 18px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Name*@
+                    <div id="foregroundTextName" style="position: absolute; top: 50%; left: 17%;
+                        transform: translate(-50%, -50%); font-size: 18px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*FatherName*@
+                    <div id="foregroundTextFatherName" style="position: absolute; top: 61%; left: 18%;
+                        transform: translate(-50%, -50%); font-size: 18px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*DateofBirth*@
+                    <div id="dateText" style="position: absolute; top: 74%; left: 15%;
+                        transform: translate(-50%, -50%); font-size: 18px; color: black; font-weight: normal; 
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                </div>
+            </div>
+            <div class="row h-50">
+                <div class="col-11 border-1 m-3">
+                    <img id="backImage" src="~/Image/PanCard/Pan_Back_NSDL.jpg" class="img-fluid h-90 w-110" alt="NSDL Back" />
+                </div>
+            </div>            
+        </div>
+    </div>
+    <br />
+    <button class="btn btn-primary" value="Print" onclick="PrintHTML()">Print</button>
+    <br><br>
+</div>
+
+<style>
+    .h-50 {
+        height: 50%; width:107%; 
+    }
+
+    .row {
+        height: 100%; 
+    }
+
+    #uploadedPhotoPreview {
+        width: 0.9in;
+        height: 0.9in; 
+        object-fit: cover;
+    }
+
+    #uploadedSignPreview {
+        width: 200px;
+        height: 37px;
+        object-fit: cover;
+    }
+</style>
+
+<script type="text/javascript">
+    //print
+    function PrintHTML() {        
+        var dvContents = document.getElementById("dvContents");
+        var printWindow = window.open('', '', 'height=600,width=1000');
+        printWindow.document.write(dvContents.innerHTML); 
+        printWindow.document.close();
+        printWindow.print();
+       
+    }
+</script>
+<script>
+
+    //Panno
+    const panNoInput = document.getElementById('PanNoInput');
+    const foregroundText = document.getElementById('foregroundTextPanNo');
+
+    panNoInput.addEventListener('input', function () 
+    {
+        foregroundText.textContent = panNoInput.value;
+    });
+
+    //Name
+    const NameInput = document.getElementById('NameInput');
+    const foregroundTextName = document.getElementById('foregroundTextName');
+
+    NameInput.addEventListener('input', function ()
+    {
+        foregroundTextName.textContent = NameInput.value;
+    });
+
+    //Father
+    const FatherNameInput = document.getElementById('FatherNameInput');
+    const foregroundTextFatherName = document.getElementById('foregroundTextFatherName');
+
+    FatherNameInput.addEventListener('input', function ()
+    {
+        foregroundTextFatherName.textContent = FatherNameInput.value;
+    });
+
+    //DateOfBirth
+     const dateOfBirthInput = document.getElementById('DateOfBirthInput');
+     const dateText = document.getElementById('dateText');
+       
+     dateOfBirthInput.addEventListener('input', function () 
+     {
+         const dateValue = dateOfBirthInput.value;
+         if (dateValue) {
+             const formattedDate = new Date(dateValue).toLocaleDateString(); 
+                dateText.textContent = formattedDate;
+         } else {
+              dateText.textContent = ''; 
+         }
+      });
+
+    function updateImages(option) {
+        const frontImage = document.getElementById('frontImage');
+        const backImage = document.getElementById('backImage');
+
+        if (option === 'NSDL') {
+            frontImage.src = '/Image/PanCard/Pan_Front_NSDL.jpg';
+            backImage.src = '/Image/PanCard/Pan_Back_NSDL.jpg';
+        } else if (option === 'UTI') {
+            frontImage.src = '/Image/PanCard/Pan_Front_UTI.jpg';
+            backImage.src = '/Image/PanCard/Pan_Back_UTI.jpg';
+        }
+    }
+
+    //photo
+    document.getElementById('Uploadphoto').addEventListener('change', function (event) {
+        const uploadedPhotoPreview = document.getElementById('uploadedPhotoPreview');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedPhotoPreview.src = e.target.result;
+                uploadedPhotoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            uploadedPhotoPreview.style.display = 'none';
+        }
+    });
+
+    //sign
+    document.getElementById('Uploadsign').addEventListener('change', function (event) {
+        const uploadedPhotoPreview = document.getElementById('uploadedSignPreview');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedPhotoPreview.src = e.target.result;
+                uploadedPhotoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            uploadedPhotoPreview.style.display = 'none';
+        }
+    });
+
+    //qrcode
+    function generateQRCode() {
+        const qrCodeContainer = document.getElementById('qrCodeContainer');
+        qrCodeContainer.innerHTML = ''; 
+        const qrContent = `${panNoInput.value}|${NameInput.value}|${FatherNameInput.value}|${dateOfBirthInput.value}`;
+
+        // Generate QR code
+        new QRCode(qrCodeContainer, {
+            text: qrContent,
+            width: 148,
+            height: 145,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+        });
+
+        const qrImageUrlInput = document.getElementById('QRImageUrlInput');
+        qrImageUrlInput.value = qrContent; // This assumes you are storing the raw QR content
+    }
+
+    panNoInput.addEventListener('input', generateQRCode);
+    NameInput.addEventListener('input', generateQRCode);
+    FatherNameInput.addEventListener('input', generateQRCode);
+    dateOfBirthInput.addEventListener('input', generateQRCode);
+    //qrcodesave
+    function saveQRCodeImage() {
+        const qrCanvas = document.querySelector('#qrCodeContainer canvas');
+        const qrImageBase64 = qrCanvas.toDataURL('image/png');       
+        document.getElementById('QRImageUrlInput').value = qrImageBase64;
+    }
+
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />  
+}
+
+
+

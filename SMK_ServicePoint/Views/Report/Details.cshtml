@@ -1,0 +1,57 @@
+﻿@model Report
+<div class="container" style="margin-left:18%">
+    <div class="card">
+        <div class="card-header text-center text-uppercase">
+            Report Details
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Customer Name :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model..CustomerCustomerName</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Starting Date : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text">@Model.Startdate</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Ending Date : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text">@Model.Enddate</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Service Type : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text">@Model.ServiceType</p>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a asp-controller="Report" asp-action="Index" class="btn btn-danger">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

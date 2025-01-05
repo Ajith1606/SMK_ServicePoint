@@ -1,0 +1,267 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<User> signInManager;
+<div class="container">
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h2>SMK-Service Point</h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="About">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Service">Our Services</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                        </li>
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="userMenuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Services
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="userMenuDropdown">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Pancard" asp-action="Index">Pancard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Smartcard" asp-action="Index">Smartcard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Aadharcard" asp-action="Index">Aadharcard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Votercard" asp-action="Index">Votercard</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Report" asp-action="Index">Reports</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Billing" asp-action="Index">Billing</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-heading header-text" style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Contact Us</h1>
+            <span>feel free to send us a message now!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-information" style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="contact-item">
+              <i class="fa fa-phone"></i>
+              <h4>Phone</h4>
+              <p>Our team is available to assist you with any inquiries or support. Feel free to reach out to us via phone for quick assistance.</p>
+              <a href="#">822-098-4327</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="contact-item">
+              <i class="fa fa-envelope"></i>
+              <h4>Email</h4>
+              <p>Prefer to write to us? Send your queries or feedback to our email, and we'll respond promptly.
+
+                We're here to ensure your experience with us is seamless and satisfying.
+                
+                </p>
+              <a href="#">smkmaniari@gmail.com</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="contact-item">
+              <i class="fa fa-map-marker"></i>
+              <h4>Location</h4>
+              <p>bus stop, near Nattarmanglam, <br>Nattarmangalam, Kalaiyur, Tamil Nadu 604206</p>
+              <a href="#">View on Google Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callback-form contact-us" style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Send us a <em>message</em></h2>           
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="contact-form">
+              <form id="contact" action="" method="get">
+                <div class="row">
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" class="form-control" id="email"  placeholder="E-Mail Address" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="subject" type="text" class="form-control" id="subject" placeholder="Subject" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="map" style="width:135%;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8235.650704407737!2d79.49938774578081!3d12.25543946744791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5337ace36c7781%3A0xed6e2436a4181eb0!2sSMK%20e-CORNER%20%26%20SERVICE%20POINT!5e1!3m2!1sen!2sin!4v1734869502576!5m2!1sen!2sin" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+     
+    </div>
+
+    <div class="partners contact-partners" style="width:121%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="owl-partners owl-carousel">
+              <div class="partner-item">
+                <img src="~/assets/images/welcome.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  
+    <footer style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 footer-item">
+            <h4>SMK-Service Point</h4>
+            <p>We are updating the Government personal Details like creating new Cards and has a service called E-Savai.
+              We are updating the Government personal Details like Aadhaar Card, Pan Card, Smart Card and Voter Card Updates as well as creating new Cards.
+              You can download, edit and Create a new Government Cards through our services</p>
+            <ul class="social-icons">
+              <li><a rel="nofollow" href="https://fb.com/templatemo" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-behance"></i></a></li>
+            </ul>
+          </div>
+         
+          <div class="col-md-4 footer-item">
+            <h4>Additional Pages</h4>
+            <ul class="menu-list">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">How We Work</a></li>
+              <li><a href="#">Quick Support</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-item last-item">
+            <h4>Contact Us</h4>
+            <div class="contact-form">
+              <form id="contact footer-contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" class="form-control" id="email"  placeholder="E-Mail Address" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <div class="sub-footer" style="width:135%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p>Copyright &copy; SMK-Service Point Co., Ltd.
+            
+            - Design : <a  href="#" target="_blank">Ajith Kumar</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="~/assets/js/custom.js"></script>
+<script src="~/assets/js/owl.js"></script>
+<script src="~/assets/js/slick.js"></script>
+<script src="~/assets/js/accordions.js"></script>
+
+<script language="text/Javascript">
+
+    cleared[0] = cleared[1] = cleared[2] = 0;
+    function clearField(t){
+    if(! cleared[t.id]){
+        cleared[t.id] = 1;
+        t.value='';
+        t.style.color='#fff';
+        }
+    }
+</script>

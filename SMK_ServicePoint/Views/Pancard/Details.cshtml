@@ -1,0 +1,87 @@
+﻿@model PanCard
+<div class="container" style="margin-left:18%">
+    <div class="card">
+        <div class="card-header text-center text-uppercase">
+            PanCard Details
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Pan NO :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.PanNo</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Name : </strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.Name</p>
+                        </div>                  
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Father Name :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.FatherName</p>
+                        </div>                      
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Date Of Birth :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.DateofBirth</p>
+                        </div>                       
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>PanCard Type :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.PanNSDLUTI</p>
+                        </div>                      
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Photo Image URL :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.PhotoImageUrl</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col=md-4">
+                            <p class="card-text text-uppercase"><strong>Sign Image URL :</strong></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text"> @Model.SignImageUrl</p>
+                        </div>                  
+                    </div>
+                    <br />
+                </div>
+                <div class="col-md-2">
+                    <img src="@Model.PhotoImageUrl" width="150%" height="50%" />
+                </div>               
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a asp-controller="Pancard" asp-action="Index" class="btn btn-danger">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

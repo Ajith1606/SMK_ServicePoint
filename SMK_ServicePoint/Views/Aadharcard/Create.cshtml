@@ -1,0 +1,477 @@
+﻿@model Aadhar
+<script src="path/to/qrcode.min.js"></script>
+
+<div class="container" style="margin-left:18%">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <h2 class="text text-uppercase text-center">Create Aadhaar</h2>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6  border-1 border">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="@Model.TamilName" class="form-label"></label>
+                    <input asp-for="@Model.TamilName" id="TamilNameInput" class="form-control" />
+                    <span asp-validation-for="@Model.TamilName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Name" class="form-label"></label>
+                    <input asp-for="@Model.Name" id="NameInput" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Gender" class="form-label"></label>               
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>
+                                @Html.RadioButtonFor(m => m.Gender, "Male", new { @class = "gender-radio", data_text = "ஆண் / Male" }) ஆண் / Male
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>
+                                @Html.RadioButtonFor(m => m.Gender, "Female", new { @class = "gender-radio", data_text = "பெண் / Female" }) பெண் / Female
+                            </label>
+                        </div>
+                    </div>
+                    <span asp-validation-for="@Model.Gender" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.DateofBirth" class="form-label"></label>
+                    @Html.TextBoxFor(m => m.DateofBirth, new { @type = "date", @class = "form-control", id = "DateOfBirthInput" })
+                    <span asp-validation-for="@Model.DateofBirth" class="text-danger"></span>
+                </div>            
+                <div class="mb-3">
+                    <label asp-for="@Model.TamilAddress" class="form-label"></label>
+                    <input asp-for="@Model.TamilAddress" id="TamilAddressInput" class="form-control" />
+                    <span asp-validation-for="@Model.TamilAddress" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Address" class="form-label"></label>
+                    <input asp-for="@Model.Address" id="AddressInput" class="form-control" />
+                    <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                   <div class="row">
+                       <div class="col-sm-4">
+                            <label asp-for="@Model.Aadharno1" class="form-label"></label>
+                            <input asp-for="@Model.Aadharno1" id="Aadharno1Input" class="form-control" />
+                            <span asp-validation-for="@Model.Aadharno1" class="text-danger"></span>
+                       </div>
+                        <div class="col-sm-4">
+                            <label asp-for="@Model.Aadharno2" class="form-label"></label>
+                            <input asp-for="@Model.Aadharno2" id="Aadharno2Input" class="form-control" />
+                            <span asp-validation-for="@Model.Aadharno2" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-4">
+                            <label asp-for="@Model.Aadharno3" class="form-label"></label>
+                            <input asp-for="@Model.Aadharno3" id="Aadharno3Input" class="form-control" />
+                            <span asp-validation-for="@Model.Aadharno3" class="text-danger"></span>
+                        </div>
+                   </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.PhotoImageUrl" class="form-label"></label>
+                    <input type="file" name="photo" id="Uploadphoto" class="form-control" />
+                    <small><strong>Note:</strong>Please make sure upload Image should be in Passport size</small>              
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.QRImageUrl" class="form-label"></label>
+                    <input asp-for="@Model.QRImageUrl" id="QRImageUrlInput" readonly class="form-control" />                  
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.AadharnoIssuedDate" class="form-label"></label>
+                    @Html.TextBoxFor(m => m.AadharnoIssuedDate, new { @type = "date", @class = "form-control", id = "AadharnoIssuedDateInput" })
+                    <span asp-validation-for="@Model.AadharnoIssuedDate" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <a asp-controller="Aadharcard" asp-action="Index" class="btn btn-danger"> Back </a>
+                    <button type="submit" class="btn btn-success"> Create </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 border-1 border" id="dvContents">
+            <div class="row h-50">
+                <div class="col-11 border-1 m-3 position-relative">
+                    <img id="frontImage" src="~/Image/AadharCard/Adhar_Front.jpg" class="img-fluid h-95 w-100" alt="NSDL Front" />
+                    @*Gender*@
+                    <span id="foregroundText"                   
+                          style=" position: absolute; top: 27%; left: 36%; font-size: 20px; color: black; font-weight: normal;">
+                    </span>
+                    @*Vericalissued*@
+                    <div id="rotatedText" style=" position: absolute; top: 155px; left: 5%;  font-size: 15px;
+                        transform: translate(-50%, -100%) rotate(-90deg); transform-origin: center; color: black;
+                        font-weight: normal; text-align: center;"> Aadhaar no. Issued: --/--/----
+                    </div>
+                    @*PhotoBlackandWhite*@
+                    <img id="uploadedPhotoPreviewBlackandWhite" src="#" alt="Uploaded Passport Photo" style="display: none;
+                        position: absolute; top: 28%; left: 88%; transform: translate(-50%, -50%);
+                        width: 0.58in; height: 0.7in; object-fit: cover; filter: grayscale(100%)" />
+                    @*Photo*@
+                    <img id="uploadedPhotoPreview" src="#" alt="Uploaded Passport Photo" style="display: none;
+                        position: absolute; top: 35.8%; left: 18%; transform: translate(-50%, -50%);
+                        width: 1.15in; height: 1.42in; object-fit: cover;" />
+                    @*TamilName*@
+                    <div id="foregroundTextTamilName" style="position: absolute; top: 16%; left: 45%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Name*@
+                    <div id="foregroundTextName" style="position: absolute; top: 23%; left: 45%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>          
+                    @*DateofBirth*@
+                    <div id="dateText" style="position: absolute; top: 38%; left: 45%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Aadharno1*@
+                    <div id="foregroundTextno1" style="position: absolute; top: 58%; left: 40%;
+                        transform: translate(-50%, -50%); font-size: 25px; color: black; font-weight: bold;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Aadharno2*@
+                    <div id="foregroundTextno2" style="position: absolute; top: 58%; left: 53%;
+                        transform: translate(-50%, -50%); font-size: 25px; color: black; font-weight: bold;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Aadharno3*@
+                    <div id="foregroundTextno3" style="position: absolute; top: 58%; left: 67%;
+                        transform: translate(-50%, -50%); font-size: 25px; color: black; font-weight: bolder;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                      @*Aadharno7*@
+                    <div id="foregroundTextno7" style="position: absolute; top: 37%; left: 83%;
+                        transform: translate(-50%, -50%); font-size: 9px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Aadharno8*@
+                    <div id="foregroundTextno8" style="position: absolute; top: 37%; left: 88%;
+                        transform: translate(-50%, -50%); font-size: 9px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Aadharno9*@
+                    <div id="foregroundTextno9" style="position: absolute; top: 37%; left: 93%;
+                        transform: translate(-50%, -50%); font-size: 9px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                </div>
+            </div>
+            <div class="row h-50">
+                <div class="col-11 border-1 m-3">
+                    <img id="backImage" src="~/Image/AadharCard/Adhar_Back.jpg" class="img-fluid h-95 w-100" alt="NSDL Back" />
+                    @*Details as on*@
+                    <div style="position: absolute; top: 35%; left: 3%; transform: rotate(-90deg) translateX(-50%); transform-origin: left top;">
+                        Details as on: @DateTime.Now.ToString("d-M-yyyy")
+                    </div> 
+                    @*QrCode*@
+                    <div id="qrCodeContainer" style="position: absolute; top: 30%; left: 76%;
+                        transform: translate(-50%, -50%); width: 100px; height: 100px;">
+                    </div>
+                    @*TamilAddress*@
+                    <div id="foregroundTextTamilAddress" style="position: absolute; top: 25%; left: 35%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: pre-wrap; word-wrap: break-word;"">
+                    </div>
+                    @*Address*@
+                    <div id="foregroundTextAddress" style="position: absolute; top: 45%; left: 35%;
+                        transform: translate(-50%, -50%); font-size: 20px; color: black; font-weight: normal;
+                        text-align: center; white-space: pre-wrap; word-wrap: break-word;">
+                    </div>
+                     @*Aadharno4*@
+                    <div id="foregroundTextno4" style="position: absolute; top: 59%; left: 32%;
+                        transform: translate(-50%, -50%); font-size: 25px; color: black; font-weight: bold;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Aadharno5*@
+                    <div id="foregroundTextno5" style="position: absolute; top: 59%; left: 46%;
+                        transform: translate(-50%, -50%); font-size: 25px; color: black; font-weight: bold;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Aadharno6*@
+                    <div id="foregroundTextno6" style="position: absolute; top: 59%; left: 60%;
+                        transform: translate(-50%, -50%); font-size: 25px; color: black; font-weight: bolder;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                     
+                 @*    <div style="position: absolute; top: 50%; left: 0; transform: rotate(-90deg) translateX(-50%); transform-origin: left top;">
+                          Details as on: @DateTime.Now.ToString("d-M-yyyy")
+                    </div> *@
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" value="Print" onclick="PrintHTML()">Print</button>
+    <br><br>
+</div>
+
+<style>
+    .h-50 {
+        height: 50%; width:107%;
+    }
+
+    .row {
+        height: 100%;
+    }
+
+    #uploadedPhotoPreview {
+        width: 1.15in;
+        height: 1.42in;
+        object-fit: cover;
+    }
+
+    #uploadedPhotoPreviewBlackandWhite {
+        width: 0.7in;
+        height: 0.8in;
+        object-fit: cover;
+    }
+
+</style>
+
+<script type="text/javascript">
+    //print
+    function PrintHTML() {
+        var dvContents = document.getElementById("dvContents");
+        var printWindow = window.open('', '', 'height=600,width=1000');
+        printWindow.document.write(dvContents.innerHTML);
+        printWindow.document.close();
+        printWindow.print();
+}
+</script>
+<script>
+
+    //TamilName
+    const TamilNameInput = document.getElementById('TamilNameInput');
+    const foregroundText = document.getElementById('foregroundTextTamilName');
+
+    TamilNameInput.addEventListener('input', function () {
+        foregroundText.textContent = TamilNameInput.value;
+    });
+
+    //Name
+    const NameInput = document.getElementById('NameInput');
+    const foregroundTextName = document.getElementById('foregroundTextName');
+
+    NameInput.addEventListener('input', function () {
+        foregroundTextName.textContent = NameInput.value;
+    });
+
+    //Gender
+    document.querySelectorAll(".gender-radio").forEach(function (radio) {
+        radio.addEventListener("change", function () {
+            if (this.checked) {
+                const selectedText = this.getAttribute("data-text");
+                const textElement = document.getElementById("foregroundText");
+                textElement.innerText = selectedText; // Update text
+            }
+        });
+    });
+
+    //DateOfBirth
+     const dateOfBirthInput = document.getElementById('DateOfBirthInput');
+     const dateText = document.getElementById('dateText');
+
+     dateOfBirthInput.addEventListener('input', function ()
+     {
+         const dateValue = dateOfBirthInput.value;
+         if (dateValue) {
+             const formattedDate = new Date(dateValue).toLocaleDateString();
+                dateText.textContent = formattedDate;
+         } else {
+              dateText.textContent = '';
+         }
+      });
+
+    //photo
+    document.getElementById('Uploadphoto').addEventListener('change', function (event) {
+        const uploadedPhotoPreview = document.getElementById('uploadedPhotoPreview');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedPhotoPreview.src = e.target.result;
+                uploadedPhotoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            uploadedPhotoPreview.style.display = 'none';
+        }
+    });
+
+    //photoBlackandWhite
+    document.getElementById('Uploadphoto').addEventListener('change', function (event) {
+        const uploadedPhotoPreview = document.getElementById('uploadedPhotoPreviewBlackandWhite');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedPhotoPreview.src = e.target.result;
+                uploadedPhotoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            uploadedPhotoPreview.style.display = 'none';
+        }
+    });
+
+    //TamilAddress
+    const TamilAddressInput = document.getElementById('TamilAddressInput');
+    const foregroundTextTamilAddress = document.getElementById('foregroundTextTamilAddress');
+
+    TamilAddressInput.addEventListener('input', function () {
+        const text = TamilAddressInput.value;
+
+        const lines = [];   
+        for (let i = 0; i < text.length; i += 17) 
+        {
+            lines.push(text.substring(i, i + 17));        
+        }   
+        foregroundTextTamilAddress.textContent = lines.join('\n');
+    });
+
+    //Address
+    const Address = document.getElementById('AddressInput');
+    const foregroundTextAddress = document.getElementById('foregroundTextAddress');
+
+    Address.addEventListener('input', function () {
+        const text = Address.value;
+   
+        const lines = [];
+        for (let i = 0; i < text.length; i += 17) {
+            lines.push(text.substring(i, i + 17));
+        }
+        foregroundTextAddress.textContent = lines.join('\n');
+    });
+
+  
+    //qrcode
+    function generateQRCode() {
+        const qrCodeContainer = document.getElementById('qrCodeContainer');
+        qrCodeContainer.innerHTML = '';
+        const qrContent = `${NameInput.value}|${NameInput.value}|${AddressInput.value}|${DateOfBirthInput.value}|${Aadharno1Input.value}|${Aadharno2Input.value}|${Aadharno3Input.value}|${AadharnoIssuedDateInput.value}`;
+
+        // Generate QR code
+        new QRCode(qrCodeContainer, {
+            text: qrContent,
+            width: 145,
+            height: 145,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+        });
+
+        const qrImageUrlInput = document.getElementById('QRImageUrlInput');
+        qrImageUrlInput.value = qrContent; // This assumes you are storing the raw QR content
+    }
+
+    NameInput.addEventListener('input', generateQRCode);
+    NameInput.addEventListener('input', generateQRCode);
+    AddressInput.addEventListener('input', generateQRCode);
+    DateOfBirthInput.addEventListener('input', generateQRCode);
+    Aadharno1Input.addEventListener('input', generateQRCode);
+    Aadharno2Input.addEventListener('input', generateQRCode);
+    Aadharno3Input.addEventListener('input', generateQRCode);
+    AadharnoIssuedDateInput.addEventListener('input', generateQRCode);
+    //qrcodesave
+    function saveQRCodeImage() {
+        const qrCanvas = document.querySelector('#qrCodeContainer canvas');
+        const qrImageBase64 = qrCanvas.toDataURL('image/png');
+        document.getElementById('QRImageUrlInput').value = qrImageBase64;
+    }
+    
+    //Aadharno1
+    const No1Input = document.getElementById('Aadharno1Input');
+    const foregroundTextNo1 = document.getElementById('foregroundTextno1');
+
+    No1Input.addEventListener('input', function () {
+        foregroundTextNo1.textContent = No1Input.value;
+    });
+
+    //Aadharno2
+    const No2Input = document.getElementById('Aadharno2Input');
+    const foregroundTextNo2 = document.getElementById('foregroundTextno2');
+
+    No2Input.addEventListener('input', function () {
+        foregroundTextNo2.textContent = No2Input.value;
+    });
+            
+    //Aadharno3
+    const No3Input = document.getElementById('Aadharno3Input');
+    const foregroundTextNo3 = document.getElementById('foregroundTextno3');
+
+    No3Input.addEventListener('input', function () {
+        foregroundTextNo3.textContent = No3Input.value;
+    });
+
+    //Aadharno4
+    const No4Input = document.getElementById('Aadharno1Input');
+    const foregroundTextNo4 = document.getElementById('foregroundTextno4');
+
+    No4Input.addEventListener('input', function () {
+        foregroundTextNo4.textContent = No4Input.value;
+    });
+
+    //Aadharno5
+    const No5Input = document.getElementById('Aadharno2Input');
+    const foregroundTextNo5 = document.getElementById('foregroundTextno5');
+
+    No5Input.addEventListener('input', function () {
+        foregroundTextNo5.textContent = No5Input.value;
+    });
+
+   //Aadharno6
+   const No6Input = document.getElementById('Aadharno3Input');
+   const foregroundTextNo6 = document.getElementById('foregroundTextno6');
+
+   No6Input.addEventListener('input', function () {
+       foregroundTextNo6.textContent = No6Input.value;
+   });
+
+   //Aadharno7
+   const No7Input = document.getElementById('Aadharno1Input');
+   const foregroundTextNo7 = document.getElementById('foregroundTextno7');
+
+   No7Input.addEventListener('input', function () {
+       foregroundTextNo7.textContent = No7Input.value;
+   });
+
+   //Aadharno8
+   const No8Input = document.getElementById('Aadharno2Input');
+   const foregroundTextNo8 = document.getElementById('foregroundTextno8');
+
+   No8Input.addEventListener('input', function () {
+       foregroundTextNo8.textContent = No8Input.value;
+   });
+
+   //Aadharno9
+   const No9Input = document.getElementById('Aadharno3Input');
+   const foregroundTextNo9 = document.getElementById('foregroundTextno9');
+
+   No9Input.addEventListener('input', function () {
+       foregroundTextNo9.textContent = No9Input.value;
+   });
+
+   //Verticalissued
+   const dateInput = document.getElementById('AadharnoIssuedDateInput');
+   const rotatedText = document.getElementById('rotatedText');
+
+   dateInput.addEventListener('input', function () {
+   const selectedDate = dateInput.value;
+    if (selectedDate) {  
+        const date = new Date(selectedDate);
+        const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;    
+        rotatedText.textContent = `Aadhaar no. Issued: ${formattedDate}`;
+        }
+    });
+
+    
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+

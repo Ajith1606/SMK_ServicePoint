@@ -1,0 +1,516 @@
+﻿@model Voter
+<script src="path/to/qrcode.min.js"></script>
+
+<div class="container" style="margin-left:18%">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <h2 class="text text-uppercase text-center">Create Voter</h2>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6  border-1 border">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="@Model.EpicNo" class="form-label"></label>
+                    <input asp-for="@Model.EpicNo" id="PanNoInput" class="form-control" />
+                    <span asp-validation-for="@Model.EpicNo" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.TamilName" class="form-label"></label>
+                    <input asp-for="@Model.TamilName" id="FatherNameInput" class="form-control" />
+                    <span asp-validation-for="@Model.TamilName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Name" class="form-label"></label>
+                    <input asp-for="@Model.Name" id="NameInput" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>                           
+                <div class="mb-3">
+                    <label asp-for="@Model.Title" class="form-label"></label>
+                    @Html.DropDownListFor(
+                             m => m.Title,
+                                new SelectList(
+                                new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "தந்தை / Father", Value = "Father" },
+                                    new SelectListItem { Text = "கணவர் / Husband", Value = "Husband" }
+                                },
+                             "Value",
+                             "Text"
+                             ),
+                             "Select Title",
+                             new { @class = "form-control", onchange = "handleTitleChange(this)" }
+                    )
+                    <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label id="TamilLabel" asp-for="@Model.TamilFatherNameorHusbandName" class="form-label"></label>
+                    <input asp-for="@Model.TamilFatherNameorHusbandName" id="TamilFatherNameorHusbandNameInput" class="form-control" />
+                    <span asp-validation-for="@Model.TamilFatherNameorHusbandName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label id="EnglishLabel" asp-for="@Model.FatherNameorHusbandName" class="form-label"></label>
+                    <input asp-for="@Model.FatherNameorHusbandName" id="FatherNameorHusbandNameInput" class="form-control" />
+                    <span asp-validation-for="@Model.FatherNameorHusbandName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Gender" class="form-label"></label>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>
+                                @Html.RadioButtonFor(m => m.Gender, "Male", new { @class = "gender-radio", data_text = "ஆண் / Male" }) ஆண் / Male
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>
+                                @Html.RadioButtonFor(m => m.Gender, "Female", new { @class = "gender-radio", data_text = "பெண் / Female" }) பெண் / Female
+                            </label>
+                        </div>
+                    </div>
+                    <span asp-validation-for="@Model.Gender" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.DateofBirth" class="form-label"></label>
+                    @Html.TextBoxFor(m => m.DateofBirth, new { @type = "date", @class = "form-control", id = "DateOfBirthInput" })
+                    <span asp-validation-for="@Model.DateofBirth" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.TamilAddress" class="form-label"></label>
+                    <input asp-for="@Model.TamilAddress" id="TamilAddressInput" class="form-control" />
+                    <span asp-validation-for="@Model.TamilAddress" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Address" class="form-label"></label>
+                    <input asp-for="@Model.Address" id="AddressInput" class="form-control" />
+                    <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.TamilElectoralRegistrationOfficier" class="form-label"></label>
+                    <input asp-for="@Model.TamilElectoralRegistrationOfficier" id="TamilElectoralRegistrationOfficierInput" class="form-control" />
+                    <span asp-validation-for="@Model.TamilElectoralRegistrationOfficier" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.ElectoralRegistrationOfficier" class="form-label"></label>
+                    <input asp-for="@Model.ElectoralRegistrationOfficier" id="ElectoralRegistrationOfficierInput" class="form-control" />
+                    <span asp-validation-for="@Model.ElectoralRegistrationOfficier" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.DownloadDate" class="form-label"></label>
+                    @Html.TextBoxFor(m => m.DownloadDate, new { @type = "date", @class = "form-control", id = "DownloadDateInput" })
+                    <span asp-validation-for="@Model.DownloadDate" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.PhotoImageUrl" class="form-label"></label>
+                    <input type="file" name="photo" id="Uploadphoto" class="form-control" />
+                    <small><strong>Note:</strong>Please make sure upload Image should be in Passport size</small>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.SignImageUrl" class="form-label"></label>
+                    <input type="file" name="sign" id="Uploadsign" class="form-control" />
+                    <small><strong>Note:</strong>The Sign Image cannot be changed. Please make sure upload correct Image</small>                  
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.QRImageUrl" class="form-label"></label>
+                    <input asp-for="@Model.QRImageUrl" id="QRImageUrlInput" readonly class="form-control" />         
+                </div>
+                <div class="mb-3">
+                    <a asp-controller="Votercard" asp-action="Index" class="btn btn-danger"> Back </a>
+                    <button type="submit" class="btn btn-success"> Create </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 border-1 border" id="dvContents">
+            <div class="row h-50">
+                <div class="col-11 border-1 m-3 position-relative">
+                    <img id="frontImage" src="~/Image/VoterCard/Voter_Frontfather.png" class="img-fluid h-95 w-100" alt="NSDL Front" />
+                    <img id="uploadedPhotoPreview" src="#" alt="Uploaded Passport Photo" style="display: none;
+                        position: absolute; top: 22.2%; left: 18.5%; transform: translate(-50%, -50%);
+                        width: 1.3in; height: 1.4in; object-fit: cover;" />
+                    @*vertical*@
+                    <div id="rotatedText" style="position: absolute; top: 12%; left: 91%;
+                        transform: rotate(-90deg) translateX(-50%); transform-origin: left top; font-size: 11px">
+                    </div>
+                    @*Gender*@
+                    <span id="foregroundText"
+                          style=" position: absolute; top: 22.3%; left: 63%; font-size: 17px; color: black; font-weight: normal;">
+                    </span>
+                    @*PhotoBlackandWhite*@
+                    <img id="uploadedPhotoPreviewBlackandWhite" src="#" alt="Uploaded Passport Photo" style="display: none;
+                        position: absolute; top: 12%; left: 87%; transform: translate(-50%, -50%);
+                        width: 0.44in; height: 0.45in; object-fit: cover; filter: grayscale(100%)" />
+                    @*EpicNo*@
+                    <div id="foregroundTextPanNo" style="position: absolute; top: 11%; left: 16%;
+                        transform: translate(-50%, -50%); font-size: 15px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*TamilName*@
+                    <div id="foregroundTextName" style="position: absolute; top: 15.2%; left: 60%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Name*@
+                    <div id="foregroundTextFatherName" style="position: absolute; top: 13%; left: 60%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>                
+                    @*DateofBirth*@
+                    <div id="dateText" style="position: absolute; top: 30%; left: 73%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*TamilFatherNameorHusbandName*@
+                    <div id="foregroundTextTamilFatherNameorHusbandName" style="position: absolute; top: 18%; left: 76%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*FatherNameorHusbandName*@
+                    <div id="foregroundTextFatherNameorHusbandName" style="position: absolute; top: 21.5%; left: 76%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                </div>
+            </div>
+            <div class="row h-50">
+                <div class="col-11 border-1 m-3">
+                    <img id="backImage" src="~/Image/VoterCard/Voter_Backn.png" class="img-fluid h-95 w-120" alt="NSDL Back" />
+                    @*DownloadDate*@
+                    <div id="dateText1" style="position: absolute; top: 30.5%; left: 71%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*EpicNo*@
+                    <div id="foregroundTextPanNo1" style="position: absolute; top: 27.2%; left: 17%;
+                        transform: translate(-50%, -50%); font-size: 18px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*Sign*@
+                    <img id="uploadedSignPreview" src="#" alt="Uploaded Passport Photo" style="display: none;
+                        position: absolute; top: 5.4%; left: 18%; transform: translate(-50%, -50%);
+                        width: 135px; height: 35px; object-fit: cover;" />
+                    @*QrCode*@
+                    <div id="qrCodeContainer" style="position: absolute; top: 17.8%; left: 18%;
+                        transform: translate(-50%, -50%); width: 100px; height: 100px;">
+                    </div>
+                    @*TamilAddress*@
+                    <div id="foregroundTextTamilAddress" style="position: absolute; top: 5.4%; left: 76%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: pre-wrap; word-wrap: break-word;" ">
+                    </div>
+                    @*Address*@
+                    <div id="foregroundTextAddress" style="position: absolute; top: 15.4%; left: 76%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: pre-wrap; word-wrap: break-word;">
+                    </div>
+                    @*TamilElectoralRegistrationOfficier*@
+                    <div id="foregroundTextTamilElectoralRegistrationOfficier" style="position: absolute; top: 21.5%; left: 77%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                    @*ElectoralRegistrationOfficier*@
+                    <div id="foregroundTextElectoralRegistrationOfficier" style="position: absolute; top: 26.2%; left: 77%;
+                        transform: translate(-50%, -50%); font-size: 17px; color: black; font-weight: normal;
+                        text-align: center; white-space: nowrap;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" value="Print" onclick="PrintHTML()">Print</button>
+    <br><br>
+</div>
+
+<style>
+    .h-50 {
+        height: 50%; width:107%;
+    }
+
+    .row {
+        height: 100%;
+    }
+
+    #uploadedPhotoPreview {
+        width: 2.2in;
+        height: 2.2in;
+        object-fit: cover;
+    }
+
+    #uploadedSignPreview {
+        width: 150px;
+        height: 35px;
+        object-fit: cover;
+    }
+</style>
+
+<script type="text/javascript">
+    //print
+    function PrintHTML() {
+        var dvContents = document.getElementById("dvContents");
+        var printWindow = window.open('', '', 'height=600,width=1000');
+        printWindow.document.write(dvContents.innerHTML);
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+<script>
+    //vertical
+    document.getElementById('PanNoInput').addEventListener('input', function () {
+        const inputNumber = this.value;
+        const rotatedTextDiv = document.getElementById('rotatedText');
+        rotatedTextDiv.textContent = inputNumber; 
+    });
+
+    //Panno
+    const panNoInput = document.getElementById('PanNoInput');
+    const foregroundText = document.getElementById('foregroundTextPanNo');
+
+    panNoInput.addEventListener('input', function ()
+    {
+        foregroundText.textContent = panNoInput.value;
+    });
+
+    //Panno1
+    const panNoInput1 = document.getElementById('PanNoInput');
+    const foregroundText1 = document.getElementById('foregroundTextPanNo1');
+
+    panNoInput1.addEventListener('input', function () {
+        foregroundText1.textContent = panNoInput1.value;
+    });
+
+    //TamilElectoralRegistrationOfficierInput
+    const TamilElectoralInput = document.getElementById('TamilElectoralRegistrationOfficierInput');
+    const foregroundTextTamilElectoral = document.getElementById('foregroundTextTamilElectoralRegistrationOfficier');
+
+    TamilElectoralInput.addEventListener('input', function () {
+        foregroundTextTamilElectoral.textContent = TamilElectoralInput.value;
+    });
+
+    //ElectoralRegistrationOfficierInput
+    const ElectoralInput = document.getElementById('ElectoralRegistrationOfficierInput');
+    const foregroundTextElectoral = document.getElementById('foregroundTextElectoralRegistrationOfficier');
+
+    ElectoralInput.addEventListener('input', function () {
+        foregroundTextElectoral.textContent = ElectoralInput.value;
+    });
+    
+    //TamilFatherNameorHusbandNameInput
+    const TamilFatherNameorHusbandName = document.getElementById('TamilFatherNameorHusbandNameInput');
+    const foregroundTextTamilFatherName = document.getElementById('foregroundTextTamilFatherNameorHusbandName');
+
+    TamilFatherNameorHusbandName.addEventListener('input', function () {
+        foregroundTextTamilFatherName.textContent = TamilFatherNameorHusbandName.value;
+    });
+
+    //FatherNameorHusbandNameInput
+    const FatherNameorHusbandName = document.getElementById('FatherNameorHusbandNameInput');
+    const foregroundTextFatherNameorHusbandName = document.getElementById('foregroundTextFatherNameorHusbandName');
+
+    FatherNameorHusbandName.addEventListener('input', function () {
+        foregroundTextFatherNameorHusbandName.textContent = FatherNameorHusbandName.value;
+    });
+
+    //Name
+    const NameInput = document.getElementById('NameInput');
+    const foregroundTextName = document.getElementById('foregroundTextName');
+
+    NameInput.addEventListener('input', function ()
+    {
+        foregroundTextName.textContent = NameInput.value;
+    });
+
+    //Father
+    const FatherNameInput = document.getElementById('FatherNameInput');
+    const foregroundTextFatherName = document.getElementById('foregroundTextFatherName');
+
+    FatherNameInput.addEventListener('input', function ()
+    {
+        foregroundTextFatherName.textContent = FatherNameInput.value;
+    });
+
+    //DateOfBirth
+     const dateOfBirthInput = document.getElementById('DateOfBirthInput');
+     const dateText = document.getElementById('dateText');
+
+     dateOfBirthInput.addEventListener('input', function ()
+     {
+         const dateValue = dateOfBirthInput.value;
+         if (dateValue) {
+             const formattedDate = new Date(dateValue).toLocaleDateString();
+                dateText.textContent = formattedDate;
+         } else {
+              dateText.textContent = '';
+         }
+      });
+
+    //DownloadDate
+    const dateOfBirthInput1 = document.getElementById('DownloadDateInput');
+    const dateText1 = document.getElementById('dateText1');
+
+    dateOfBirthInput1.addEventListener('input', function () {
+        const dateValue = dateOfBirthInput1.value;
+        if (dateValue) {
+            const formattedDate = new Date(dateValue).toLocaleDateString();
+            dateText1.textContent = formattedDate;
+        } else {
+            dateText1.textContent = '';
+        }
+    });
+
+    function updateImages(option) {
+        const frontImage = document.getElementById('frontImage');
+
+        if (option === 'Father') {
+            frontImage.src = '/Image/VoterCard/Voter_Frontfather.png';     
+        } else if (option === 'Husband') {
+            frontImage.src = '/Image/VoterCard/Voter_Fronthusband.png';
+        }
+    }
+    const tamilLabel = document.getElementById("TamilLabel");
+    const englishLabel = document.getElementById("EnglishLabel");
+
+    function handleTitleChange(dropdown) {
+        const value = dropdown.value;
+        if (value === "Father") {
+            updateImages('Father');
+            tamilLabel.innerText = "தந்தையின் பெயர்";
+            englishLabel.innerText = "Father's Name";
+        } else if (value === "Husband") {
+            updateImages('Husband');
+            tamilLabel.innerText = "கணவரின் பெயர்";
+            englishLabel.innerText = "Husband's Name";
+
+        }
+    }
+
+    //Gender
+    document.querySelectorAll(".gender-radio").forEach(function (radio) {
+        radio.addEventListener("change", function () {
+            if (this.checked) {
+                const selectedText = this.getAttribute("data-text");
+                const textElement = document.getElementById("foregroundText");
+                textElement.innerText = selectedText; // Update text
+            }
+        });
+    });
+
+    //photo
+    document.getElementById('Uploadphoto').addEventListener('change', function (event) {
+        const uploadedPhotoPreview = document.getElementById('uploadedPhotoPreview');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedPhotoPreview.src = e.target.result;
+                uploadedPhotoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            uploadedPhotoPreview.style.display = 'none';
+        }
+    });
+
+    //photoBlackandWhite
+    document.getElementById('Uploadphoto').addEventListener('change', function (event) {
+        const uploadedPhotoPreview = document.getElementById('uploadedPhotoPreviewBlackandWhite');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedPhotoPreview.src = e.target.result;
+                uploadedPhotoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            uploadedPhotoPreview.style.display = 'none';
+        }
+    });
+
+    //sign
+    document.getElementById('Uploadsign').addEventListener('change', function (event) {
+        const uploadedPhotoPreview = document.getElementById('uploadedSignPreview');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedPhotoPreview.src = e.target.result;
+                uploadedPhotoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            uploadedPhotoPreview.style.display = 'none';
+        }
+    });
+
+    //TamilAddress
+    const TamilAddressInput = document.getElementById('TamilAddressInput');
+    const foregroundTextTamilAddress = document.getElementById('foregroundTextTamilAddress');
+
+    TamilAddressInput.addEventListener('input', function () {
+        const text = TamilAddressInput.value;
+
+        const lines = [];
+        for (let i = 0; i < text.length; i += 19) {
+            lines.push(text.substring(i, i + 19));
+        }
+        foregroundTextTamilAddress.textContent = lines.join('\n');
+    });
+
+    //Address
+    const Address = document.getElementById('AddressInput');
+    const foregroundTextAddress = document.getElementById('foregroundTextAddress');
+
+    Address.addEventListener('input', function () {
+        const text = Address.value;
+
+        const lines = [];
+        for (let i = 0; i < text.length; i += 19) {
+            lines.push(text.substring(i, i + 19));
+        }
+        foregroundTextAddress.textContent = lines.join('\n');
+    });
+
+    //qrcode
+    function generateQRCode() {
+        const qrCodeContainer = document.getElementById('qrCodeContainer');
+        qrCodeContainer.innerHTML = '';
+        const qrContent = `${panNoInput.value}|${NameInput.value}|${dateOfBirthInput.value}|${FatherNameorHusbandNameInput.value}|
+                                ${AddressInput.value}|${ElectoralRegistrationOfficierInput.value}|${DownloadDateInput.value}`;
+                            
+
+        // Generate QR code
+        new QRCode(qrCodeContainer, {
+            text: qrContent,
+            width: 120,
+            height: 105,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+        });
+
+        const qrImageUrlInput = document.getElementById('QRImageUrlInput');
+        qrImageUrlInput.value = qrContent; // This assumes you are storing the raw QR content
+    }
+
+    panNoInput.addEventListener('input', generateQRCode);
+    NameInput.addEventListener('input', generateQRCode);   
+    dateOfBirthInput.addEventListener('input', generateQRCode);
+    FatherNameorHusbandNameInput.addEventListener('input', generateQRCode);
+    AddressInput.addEventListener('input', generateQRCode);
+    ElectoralRegistrationOfficierInput.addEventListener('input', generateQRCode);
+    DownloadDateInput.addEventListener('input', generateQRCode);
+    //qrcodesave
+    function saveQRCodeImage() {
+        const qrCanvas = document.querySelector('#qrCodeContainer canvas');
+        const qrImageBase64 = qrCanvas.toDataURL('image/png');
+        document.getElementById('QRImageUrlInput').value = qrImageBase64;
+    }
+
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
